@@ -49,6 +49,30 @@ const users = [
     avatar_src: "efe",
     password: "",
   },
+  {
+    id: 4,
+    name: "Samuel Claude",
+    avatar_src: "efe",
+    password: "",
+  },
+  {
+    id: 5,
+    name: "Déria Fréchette",
+    avatar_src: "efe",
+    password: "",
+  },
+  {
+    id: 6,
+    name: "Vincent Lo",
+    avatar_src: "efe",
+    password: "",
+  },
+  {
+    id: 7,
+    name: "Daniel Legault",
+    avatar_src: "efe",
+    password: "",
+  },
 ];
 export function DropdownMenuRadioGroupDemo() {
   const [position, setPosition] = useState("1");
