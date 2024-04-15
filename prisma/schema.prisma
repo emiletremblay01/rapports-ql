@@ -7,6 +7,8 @@ generator client {
   provider = "prisma-client-js"
 }
 
+//! Whenever you make changes to your Prisma models in the future, you manually need to invoke "npx prisma generate" in order to accommodate the changes in your Prisma Client API.
+
 model Post {
   id     String @id @default(auto()) @map("_id") @db.ObjectId
   title  String
