@@ -6,10 +6,13 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const users = await getAllUsers();
-  console.log(users);
+  const props = { users };
   return (
     <div className="flex">
-      <SidebarLeft className="border-r p-4 h-screen flex flex-col items-center justify-between" />
+      <SidebarLeft
+        {...props}
+        className="border-r p-4 h-screen flex flex-col items-center justify-between"
+      />
       {children}
     </div>
   );

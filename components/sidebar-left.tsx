@@ -5,7 +5,6 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { cn, getInitials } from "@/lib/utils";
 import { useEffect, useState } from "react";
-import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,7 +14,22 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-export default function SidebarLeft({ className }: { className?: string }) {
+import { User } from "@prisma/client";
+import {
+  setLoggedInUser,
+  getLoggedInUser,
+} from "@/context/useLoggedInUserStore";
+import { get } from "http";
+export default function SidebarLeft({
+  users,
+  className,
+}: {
+  users: User[];
+  className?: string;
+}) {
+  if (!getLoggedInUser()) {
+    setLoggedInUser(users[0]);
+  }
   return (
     <div id="sidebar" className={cn(className)}>
       <div className="flex flex-col gap-2 items-center">
@@ -25,62 +39,26 @@ export default function SidebarLeft({ className }: { className?: string }) {
         </Button>
       </div>
       <div>
-        <DropdownMenuRadioGroupDemo />
+        <DropdownMenuRadioGroupDemo users={users} />
       </div>
     </div>
   );
 }
-const users = [
-  {
-    id: 1,
-    name: "Emile Tremblay",
-    avatar_src: "efe",
-    password: "",
-  },
-  {
-    id: 2,
-    name: "Shayla Ngawala",
-    avatar_src: "efe",
-    password: "",
-  },
-  {
-    id: 3,
-    name: "Jean-René Gagnon",
-    avatar_src: "efe",
-    password: "",
-  },
-  {
-    id: 4,
-    name: "Samuel Claude",
-    avatar_src: "efe",
-    password: "",
-  },
-  {
-    id: 5,
-    name: "Déria Fréchette",
-    avatar_src: "efe",
-    password: "",
-  },
-  {
-    id: 6,
-    name: "Vincent Lo",
-    avatar_src: "efe",
-    password: "",
-  },
-  {
-    id: 7,
-    name: "Daniel Legault",
-    avatar_src: "efe",
-    password: "",
-  },
-];
-export function DropdownMenuRadioGroupDemo() {
-  const [position, setPosition] = useState("1");
-  const [selectedUser, setSelectedUser] = useState<any>(null);
+
+function DropdownMenuRadioGroupDemo({ users }: { users: User[] }) {
+  const loggedInUser = getLoggedInUser();
+  if (!loggedInUser) {
+    return <div>No logged in user!</div>;
+  }
+  const [selectedUser, setSelectedUser] = useState(loggedInUser);
+  const [position, setPosition] = useState(loggedInUser.id);
 
   useEffect(() => {
-    const user = users.find((user) => String(user.id) === position);
-    setSelectedUser(user);
+    const user = users.find((user) => user.id === position);
+    if (user) {
+      setLoggedInUser(user);
+      setSelectedUser(user);
+    }
   }, [position]);
 
   return (
@@ -88,10 +66,8 @@ export function DropdownMenuRadioGroupDemo() {
       <DropdownMenuTrigger asChild>
         <Button variant="outline" className="p-0 rounded-full hover:scale-105">
           <Avatar>
-            <AvatarImage src="https://github.co" />
-            <AvatarFallback>
-              {selectedUser ? getInitials(selectedUser.name) : ""}
-            </AvatarFallback>
+            <AvatarImage src="" />
+            <AvatarFallback>{getInitials(selectedUser.name)}</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
@@ -102,13 +78,9 @@ export function DropdownMenuRadioGroupDemo() {
           {users.map((user) => (
             <DropdownMenuRadioItem
               key={user.id}
-              value={String(user.id)}
+              value={user.id}
               className="gap-2"
             >
-              {/* <Avatar>
-                <AvatarImage src={user.avatar_src} />
-                <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
-              </Avatar> */}
               <div>{user.name}</div>
             </DropdownMenuRadioItem>
           ))}
