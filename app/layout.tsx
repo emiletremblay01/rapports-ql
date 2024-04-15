@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: "App with a feed of reports from the team",
 };
 
-export default function RootLayout({
+export default function TopLevelLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -30,7 +30,6 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SidebarLeft className="absolute border-r p-4 min-h-screen flex flex-col items-center justify-between" />
           {children}
         </ThemeProvider>
       </body>
