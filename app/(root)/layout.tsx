@@ -1,4 +1,5 @@
 import SidebarLeft from "@/components/sidebar-left";
+import SidebarRight from "@/components/sidebar-right";
 import getAllUsers from "@/actions/get/get-all-users";
 export default async function RootLayout({
   children,
@@ -8,12 +9,10 @@ export default async function RootLayout({
   const users = await getAllUsers();
   const props = { users };
   return (
-    <div className="flex">
-      <SidebarLeft
-        {...props}
-        className="border-r p-4 h-screen flex flex-col items-center justify-between"
-      />
+    <div className="flex ">
+      <SidebarLeft {...props} className="" />
       {children}
+      <SidebarRight className="flex-1 p-4" {...props} />
     </div>
   );
 }

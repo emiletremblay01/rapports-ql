@@ -30,15 +30,23 @@ export default function SidebarLeft({
     setLoggedInUser(users[0]);
   }
   return (
-    <div id="sidebar" className={cn(className)}>
-      <div className="flex flex-col gap-2 items-center">
-        <ModeToggle />
-        <Button size="icon">
-          <SquarePen className="h-[1.2rem] w-[1.2rem]" />
-        </Button>
-      </div>
-      <div>
-        <DropdownMenuRadioGroupDemo users={users} />
+    <div
+      id="sidebar"
+      className={cn(
+        className,
+        "flex flex-1 flex-row-reverse border-r bg-teal-200"
+      )}
+    >
+      <div className="p-4 h-screen w-48 flex flex-col items-baseline flex-initial justify-between bg-red-400">
+        <div className="flex flex-col gap-2 items-center">
+          <ModeToggle />
+          <Button size="icon">
+            <SquarePen className="h-[1.2rem] w-[1.2rem]" />
+          </Button>
+        </div>
+        <div>
+          <DropdownMenuRadioGroupDemo users={users} />
+        </div>
       </div>
     </div>
   );
