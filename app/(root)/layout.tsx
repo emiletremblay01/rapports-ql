@@ -9,6 +9,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const users = await getAllUsers();
+  console.log(users);
   const props = { users };
   return (
     <div className="flex ">
