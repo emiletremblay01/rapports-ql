@@ -1,21 +1,11 @@
 "use client";
-import { ModeToggle } from "@/components/mode-toggle";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   getLoggedInUser,
   setLoggedInUser,
 } from "@/context/useLoggedInUserStore";
 import { cn } from "@/lib/utils";
 import { User } from "@prisma/client";
-import { SquarePen } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 
 export default function SidebarRight({
   users,
