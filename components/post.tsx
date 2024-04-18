@@ -16,7 +16,7 @@ export function Post({ className }: PostProps) {
         </Avatar>
         <section className="">
           <div className="inline-flex items-baseline gap-1">
-            <h1 className="font-semibold text">Shayla Ngawala</h1>
+            <h1 className="font-semibold text">Samuel Claude</h1>
             <p className="text-muted-foreground text-sm">· 22h</p>
           </div>
           <p className="text-sm">
