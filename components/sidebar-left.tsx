@@ -4,7 +4,7 @@ import { SquarePen } from "lucide-react";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { cn, getInitials } from "@/lib/utils";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,6 +19,7 @@ import {
   setLoggedInUser,
   getLoggedInUser,
 } from "@/context/useLoggedInUserStore";
+import { log } from "console";
 export default function SidebarLeft({
   users,
   className,
@@ -54,12 +55,14 @@ export default function SidebarLeft({
 
 function DropdownMenuRadioGroupDemo({ users }: { users: User[] }) {
   const loggedInUser = getLoggedInUser();
-  if (!loggedInUser) {
-    return <div>No logged in user!</div>;
-  }
   const [selectedUser, setSelectedUser] = useState(loggedInUser);
-  const [position, setPosition] = useState(loggedInUser.id);
-
+  const [position, setPosition] = useState("");
+  useEffect(() => {
+    if (loggedInUser) {
+      setSelectedUser(loggedInUser);
+      setPosition(loggedInUser.id);
+    }
+  }, []);
   useEffect(() => {
     const user = users.find((user) => user.id === position);
     if (user) {
@@ -67,6 +70,9 @@ function DropdownMenuRadioGroupDemo({ users }: { users: User[] }) {
       setSelectedUser(user);
     }
   }, [position]);
+  if (!loggedInUser) {
+    return <div>No logged in user!</div>;
+  }
 
   return (
     <DropdownMenu>
@@ -74,7 +80,9 @@ function DropdownMenuRadioGroupDemo({ users }: { users: User[] }) {
         <Button variant="outline" className="p-0 rounded-full hover:scale-105">
           <Avatar>
             <AvatarImage src="" />
-            <AvatarFallback>{getInitials(selectedUser.name)}</AvatarFallback>
+            <AvatarFallback>
+              {selectedUser && getInitials(selectedUser.name)}
+            </AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
