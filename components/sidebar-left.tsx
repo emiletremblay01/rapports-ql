@@ -19,7 +19,8 @@ import {
   setLoggedInUser,
   getLoggedInUser,
 } from "@/context/useLoggedInUserStore";
-import { log } from "console";
+import Link from "next/link";
+
 export default function SidebarLeft({
   users,
   className,
@@ -41,8 +42,9 @@ export default function SidebarLeft({
       <div className="p-4 h-screen w-48 flex flex-col items-baseline flex-initial justify-between bg-red-400">
         <div className="flex flex-col gap-2 items-center">
           <ModeToggle />
-          <Button size="icon">
-            <SquarePen className="h-[1.2rem] w-[1.2rem]" />
+          <Button asChild size="icon">
+            <Link href="/post"><SquarePen className="h-[1.2rem] w-[1.2rem]" /></Link>
+            
           </Button>
         </div>
         <div>
