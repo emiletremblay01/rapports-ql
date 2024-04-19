@@ -2,7 +2,6 @@ import SidebarLeft from "@/components/sidebar-left";
 import SidebarRight from "@/components/sidebar-right";
 import getAllUsers from "@/actions/get/get-all-users";
 
-export const revalidate = 0;
 
 export default async function RootLayout({
   children,
