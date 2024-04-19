@@ -1,6 +1,6 @@
 "use client";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { SquarePen } from "lucide-react";
+import { Home, Settings, SquarePen } from "lucide-react";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { cn, getInitials } from "@/lib/utils";
@@ -20,6 +20,17 @@ import {
   getLoggedInUser,
 } from "@/context/useLoggedInUserStore";
 import Link from "next/link";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
 
 export default function SidebarLeft({
   users,
@@ -33,21 +44,57 @@ export default function SidebarLeft({
   }
   return (
     <div
-      id="sidebar"
-      className={cn(
-        className,
-        "flex flex-1 flex-row-reverse border-r bg-teal-200"
-      )}
+      id="sidebar-left"
+      className={cn(className, "flex flex-1 flex-row-reverse border-r ")}
     >
-      <div className="p-4 h-screen w-48 flex flex-col items-baseline flex-initial justify-between bg-red-400">
-        <div className="flex flex-col gap-2 items-center">
-          <ModeToggle />
-          <Button asChild size="icon">
-            <Link href="/post"><SquarePen className="h-[1.2rem] w-[1.2rem]" /></Link>
-            
-          </Button>
-        </div>
-        <div>
+      <div className="flex flex-col w-60 p-4 items-stretch">
+        <NavigationMenu className="flex-1 block max-w-full">
+          <NavigationMenuList className="flex-col items-baseline gap-2 space-x-0">
+            <NavigationMenuItem>
+              <Link href="/" legacyBehavior passHref>
+                <NavigationMenuLink
+                  className={cn(
+                    navigationMenuTriggerStyle(),
+                    "flex gap-2 rounded-xl py-6 px-4"
+                  )}
+                >
+                  <Home className="size-6" />
+                  Home
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/settings" legacyBehavior passHref>
+                <NavigationMenuLink
+                  className={cn(
+                    navigationMenuTriggerStyle(),
+                    "flex gap-2 rounded-xl py-6 px-4"
+                  )}
+                >
+                  <Settings className="size-6" />
+                  Settings
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <ModeToggle />
+            </NavigationMenuItem>
+            <NavigationMenuItem className="w-full mt-40 mx-4">
+              <Link href="/post" legacyBehavior passHref>
+                <NavigationMenuLink
+                  className={cn(
+                    "group inline-flex h-10 w-full gap-2 items-center justify-center rounded-full bg-primary px-4 py-6 text-sm font-medium transition-colors hover:bg-primary-foreground hover:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                  )}
+                >
+                  <SquarePen className="size-6" />
+                  Post
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+
+        <div className="flex-none">
           <DropdownMenuRadioGroupDemo users={users} />
         </div>
       </div>
@@ -79,13 +126,17 @@ function DropdownMenuRadioGroupDemo({ users }: { users: User[] }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="p-0 rounded-full hover:scale-105">
-          <Avatar>
+        <Button
+          variant="outline"
+          className="rounded-xl w-full justify-normal border-none py-8 gap-2 flex group"
+        >
+          <Avatar className="group-hover:scale-105">
             <AvatarImage src="" />
             <AvatarFallback>
               {selectedUser && getInitials(selectedUser.name)}
             </AvatarFallback>
           </Avatar>
+          {selectedUser && selectedUser.name}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">

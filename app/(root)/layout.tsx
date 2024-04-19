@@ -2,14 +2,12 @@ import SidebarLeft from "@/components/sidebar-left";
 import SidebarRight from "@/components/sidebar-right";
 import getAllUsers from "@/actions/get/get-all-users";
 
-
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const users = await getAllUsers();
-  console.log(users);
   const props = { users };
   return (
     <div className="flex ">
