@@ -13,7 +13,7 @@ export default async function RootLayout({
     <div className="flex ">
       <SidebarLeft {...props} className="" />
       {children}
-      <SidebarRight className="flex-1 p-4" {...props} />
+      <SidebarRight className="flex-1 p-4 hidden md:flex" {...props} />
     </div>
   );
 }

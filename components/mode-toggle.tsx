@@ -22,7 +22,7 @@ export function ModeToggle() {
           <Sun className="size-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:hidden" />
           <Moon className="size-6 rotate-90 hidden transition-all dark:rotate-0 dark:block" />
           <span className="sr-only">Toggle theme</span>
-          <span className="hidden sm:block">Toggle theme</span>
+          <span className="hidden md:block">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent side="right" align="end">
