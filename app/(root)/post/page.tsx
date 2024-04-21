@@ -16,17 +16,22 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 const formSchema = z.object({
-  username: z.string().min(2).max(50),
+  post: z
+    .string()
+    .min(2, {
+      message: "Post must be at least 2 characters.",
+    })
+    .max(160, {
+      message: "Post must not be longer than 160 characters.",
+    }),
 });
 
 export default function PostPage() {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      username: "",
-    },
   });
 
   // 2. Define a submit handler.
@@ -39,19 +44,26 @@ export default function PostPage() {
     <main className="flex min-h-screen w-full min-w-max max-w-2xl flex-col items-center">
       <Link href="/">back home</Link>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="w-3/4 space-y-6"
+        >
           <FormField
             control={form.control}
-            name="username"
+            name="post"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Username</FormLabel>
+                <FormLabel>Post</FormLabel>
                 <FormControl>
-                  <Input placeholder="shadcn" {...field} />
+                  <Textarea
+                    placeholder="Tell us a little bit about yourself"
+                    className="resize-none"
+                    {...field}
+                  />
                 </FormControl>
-                <FormDescription>
-                  This is your public display name.
-                </FormDescription>
+                {/* <FormDescription>
+                  You can <span>@mention</span> other users and organizations.
+                </FormDescription> */}
                 <FormMessage />
               </FormItem>
             )}
