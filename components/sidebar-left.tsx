@@ -64,8 +64,11 @@ export default function SidebarLeft({
       <div className="w-18 flex flex-col items-stretch p-2 md:w-56 md:p-4">
         <NavigationMenu className="block max-w-full flex-1">
           <NavigationMenuList className="flex-col items-center gap-2 space-x-0 md:items-stretch">
-            {pages.map((page) => (
-              <NavigationMenuItem className={cn(page.additionalClassName)}>
+            {pages.map((page, index) => (
+              <NavigationMenuItem
+                key={index}
+                className={cn(page.additionalClassName)}
+              >
                 <Link href={page.href} legacyBehavior passHref>
                   <NavigationMenuLink
                     className={cn(
