@@ -132,7 +132,7 @@ function DropdownMenuRadioGroupDemo({ users }: { users: User[] }) {
       <DropdownMenuTrigger className="" asChild>
         <Button
           variant="outline"
-          className="flex w-fit justify-center overflow-visible rounded-full p-0 hover:scale-105 md:h-14 md:w-full md:justify-normal md:gap-2 md:border md:px-2 md:hover:scale-100"
+          className="flex w-fit justify-center overflow-visible rounded-full p-0 hover:scale-105 md:h-14 md:w-full md:justify-normal md:gap-2 md:border-none md:px-2 md:hover:scale-100"
         >
           <Avatar className="">
             <AvatarImage src="" />

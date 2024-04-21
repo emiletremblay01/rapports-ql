@@ -1,4 +1,3 @@
-"use client";
 import Link from "next/link";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { ArrowLeft } from "lucide-react";
 const formSchema = z.object({
   post: z
     .string()
@@ -28,7 +28,7 @@ const formSchema = z.object({
     }),
 });
 
-export default function PostPage() {
+export default async function PostPage() {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -41,12 +41,18 @@ export default function PostPage() {
     console.log(values);
   }
   return (
-    <main className="flex min-h-screen w-full min-w-max max-w-2xl flex-col items-center">
-      <Link href="/">back home</Link>
+    <main className="flex min-h-screen w-full min-w-max max-w-2xl flex-col items-center gap-2 px-4 py-2">
+      <div className="w-full pb-10">
+        <Button asChild variant="outline" className="p-2">
+          <Link href="/">
+            <ArrowLeft className="size-6" />
+          </Link>
+        </Button>
+      </div>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-3/4 space-y-6"
+          className="w-full space-y-6"
         >
           <FormField
             control={form.control}
@@ -56,8 +62,8 @@ export default function PostPage() {
                 <FormLabel>Post</FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="Tell us a little bit about yourself"
-                    className="resize-none"
+                    placeholder="Tell us what's up..."
+                    className="h-52 resize-none"
                     {...field}
                   />
                 </FormControl>
@@ -68,7 +74,9 @@ export default function PostPage() {
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+          <Button type="submit" className=" float-right">
+            Submit
+          </Button>
         </form>
       </Form>
     </main>

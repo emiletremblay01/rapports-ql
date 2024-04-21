@@ -1,6 +1,6 @@
 import SidebarLeft from "@/components/sidebar-left";
 import SidebarRight from "@/components/sidebar-right";
-import getAllUsers from "@/actions/get/get-all-users";
+import { getAllUsers } from "@/actions/get/get-actions";
 
 export default async function RootLayout({
   children,
@@ -11,12 +11,9 @@ export default async function RootLayout({
   const props = { users };
   return (
     <div className="flex xl:container">
-      <SidebarLeft {...props} className=" lg:max-w-lg lg:w-full" />
+      <SidebarLeft {...props} className=" lg:w-full lg:max-w-lg" />
       {children}
-      <SidebarRight
-        className="lg:flex-auto lg:basis-2/3 p-4 hidden md:flex"
-        {...props}
-      />
+      <SidebarRight className="hidden p-4 md:flex lg:flex-auto lg:basis-2/3" />
     </div>
   );
 }
