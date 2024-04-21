@@ -18,8 +18,11 @@ export default function SidebarRight({
     setLoggedInUser(users[0]);
   }
   return (
-    <div id="sidebar-right" className={cn(className, "border-l h-screen")}>
-      <div className="flex flex-col gap-2 items-baseline">
+    <div
+      id="sidebar-right"
+      className={cn(className, "border-l max-w-lg h-screen")}
+    >
+      <div className="flex-col gap-2 items-baseline hidden lg:flex">
         <h1 className="w-full text-center text-xl font-bold py-4">
           PINNED POSTS
         </h1>

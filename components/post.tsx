@@ -8,7 +8,12 @@ type PostProps = {
 
 export function Post({ className }: PostProps) {
   return (
-    <section className={cn(className, "w-full border-b p-3")}>
+    <section
+      className={cn(
+        className,
+        "w-full border-b p-3 transition-colors hover:bg-muted hover:bg-opacity-10",
+      )}
+    >
       <div className="flex gap-2">
         <Avatar>
           <AvatarImage src="https://github.co" />
@@ -16,8 +21,8 @@ export function Post({ className }: PostProps) {
         </Avatar>
         <section className="">
           <div className="inline-flex items-baseline gap-1">
-            <h1 className="font-semibold text">Samuel Claude</h1>
-            <p className="text-muted-foreground text-sm">· 22h</p>
+            <h1 className="text font-semibold">Samuel Claude</h1>
+            <p className="text-sm text-muted-foreground">· 22h</p>
           </div>
           <p className="text-sm">
             Coming shortly, 𝕏 will publish everything demanded by @Alexandre and

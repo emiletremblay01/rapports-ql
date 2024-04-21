@@ -34,7 +34,12 @@ import {
 
 const pages = [
   { name: "Home", href: "/", icon: Home },
-  { name: "Pinned", href: "/pinned-posts", icon: Pin },
+  {
+    name: "Pinned",
+    href: "/pinned-posts",
+    icon: Pin,
+    additionalClassName: "lg:hidden",
+  },
   { name: "Settings", href: "/settings", icon: Settings },
 ];
 export default function SidebarLeft({
@@ -53,19 +58,19 @@ export default function SidebarLeft({
       id="sidebar-left"
       className={cn(
         className,
-        "flex h-screen flex-1 flex-row-reverse border-r "
+        "flex h-screen max-w-lg flex-1 justify-end border-r lg:w-full ",
       )}
     >
-      <div className="flex flex-col w-118 md:p-4 p-2 items-stretch">
-        <NavigationMenu className="flex-1 block max-w-full">
-          <NavigationMenuList className="flex-col items-center gap-2 space-x-0">
+      <div className="w-18 flex flex-col items-stretch p-2 md:w-56 md:p-4">
+        <NavigationMenu className="block max-w-full flex-1">
+          <NavigationMenuList className="flex-col items-center gap-2 space-x-0 md:items-stretch">
             {pages.map((page) => (
-              <NavigationMenuItem>
+              <NavigationMenuItem className={cn(page.additionalClassName)}>
                 <Link href={page.href} legacyBehavior passHref>
                   <NavigationMenuLink
                     className={cn(
                       navigationMenuTriggerStyle(),
-                      "flex gap-2 rounded-xl py-6 px-4"
+                      "flex gap-2 rounded-xl px-4 py-6 md:w-full md:justify-normal",
                     )}
                   >
                     <page.icon className="size-6" />
@@ -82,7 +87,7 @@ export default function SidebarLeft({
               <Link href="/post" legacyBehavior passHref>
                 <NavigationMenuLink
                   className={cn(
-                    "group inline-flex h-10 w-full gap-2 items-center justify-center rounded-full bg-primary px-4 py-6 text-sm font-medium transition-colors hover:bg-primary-foreground hover:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                    "group inline-flex h-10 w-full items-center justify-center gap-2 rounded-full bg-primary px-4 py-6 text-sm font-medium transition-colors hover:bg-primary-foreground hover:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50",
                   )}
                 >
                   <SquarePen className="size-6" />
@@ -127,7 +132,7 @@ function DropdownMenuRadioGroupDemo({ users }: { users: User[] }) {
       <DropdownMenuTrigger className="" asChild>
         <Button
           variant="outline"
-          className="w-fit p-0 flex overflow-visible justify-center mx-auto rounded-full hover:scale-105"
+          className="flex w-fit justify-center overflow-visible rounded-full p-0 hover:scale-105 md:h-14 md:w-full md:justify-normal md:gap-2 md:border md:px-2 md:hover:scale-100"
         >
           <Avatar className="">
             <AvatarImage src="" />

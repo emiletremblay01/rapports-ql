@@ -17,7 +17,10 @@ export function ModeToggle() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild className="border-none">
+      <DropdownMenuTrigger
+        asChild
+        className="md:w-full md:justify-normal border-none"
+      >
         <Button variant="outline" className="px-4 py-6 rounded-xl flex gap-2">
           <Sun className="size-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:hidden" />
           <Moon className="size-6 rotate-90 hidden transition-all dark:rotate-0 dark:block" />

@@ -10,10 +10,13 @@ export default async function RootLayout({
   const users = await getAllUsers();
   const props = { users };
   return (
-    <div className="flex ">
-      <SidebarLeft {...props} className="" />
+    <div className="flex xl:container">
+      <SidebarLeft {...props} className=" lg:max-w-lg lg:w-full" />
       {children}
-      <SidebarRight className="flex-1 p-4 hidden md:flex" {...props} />
+      <SidebarRight
+        className="lg:flex-auto lg:basis-2/3 p-4 hidden md:flex"
+        {...props}
+      />
     </div>
   );
 }
