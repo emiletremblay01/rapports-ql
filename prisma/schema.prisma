@@ -16,6 +16,7 @@ model Post {
   likedBy String[] @db.ObjectId
   isPinned Boolean @default(false)
   createdAt DateTime @default(now())
+  tags String[]
 }
 
 model User {
