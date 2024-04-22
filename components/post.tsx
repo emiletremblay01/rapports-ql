@@ -35,7 +35,7 @@ export function Post({ className, post }: PostProps) {
               <h1 className="text font-semibold">{user.name}</h1>
               <Tooltip>
                 <TooltipTrigger className="text-sm text-muted-foreground">
-                  {formattedDate}
+                  · {formattedDate}
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>{hoverDate}</p>
