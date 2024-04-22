@@ -13,10 +13,10 @@ model Post {
   id     String @id @default(auto()) @map("_id") @db.ObjectId
   content  String
   userId String @db.ObjectId
-  likedBy String[] @db.ObjectId
+  likedBy String[] @db.ObjectId @default([])
   isPinned Boolean @default(false)
   createdAt DateTime @default(now())
-  tags String[]
+  tags String[] @default([])
 }
 
 model User {
