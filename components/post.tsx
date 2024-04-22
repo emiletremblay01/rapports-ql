@@ -12,10 +12,11 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { dateFormatter } from "@/lib/utils";
+import { dateFormatter, getInitials } from "@/lib/utils";
 export function Post({ className, post }: PostProps) {
   const { content, createdAt, user } = post;
   const { formattedDate, hoverDate } = dateFormatter(createdAt);
+  const initials = getInitials(user.name);
   return (
     <section
       className={cn(
@@ -27,7 +28,7 @@ export function Post({ className, post }: PostProps) {
         <div className="flex gap-2">
           <Avatar>
             <AvatarImage src="https://github.co" />
-            <AvatarFallback>SN</AvatarFallback>
+            <AvatarFallback>{initials}</AvatarFallback>
           </Avatar>
           <section className="">
             <div className="inline-flex items-baseline gap-1">
