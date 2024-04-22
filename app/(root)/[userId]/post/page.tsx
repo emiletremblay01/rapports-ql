@@ -21,6 +21,7 @@ import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
 import { useParams } from "next/navigation";
 import { toast } from "sonner";
+import { revalidatePath } from "next/cache";
 const formSchema = z.object({
   post: z
     .string()
@@ -52,6 +53,7 @@ export default function PostPage() {
       const res = await axios.post(`/api/post`, data);
       if (res.status === 200) {
         toast("Post created successfully.");
+        revalidatePath("/[useId]/home", "page");
         return;
       }
       toast("the response status is " + res.status);
