@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
+import { useParams } from "next/navigation";
 const formSchema = z.object({
   post: z
     .string()
@@ -31,6 +32,7 @@ const formSchema = z.object({
 });
 
 export default function PostPage() {
+  const params = useParams();
   const [loading, setLoading] = useState(false);
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -53,7 +55,7 @@ export default function PostPage() {
     <main className="flex min-h-screen w-full min-w-max max-w-2xl flex-col items-center gap-2 px-4 py-2">
       <div className="w-full pb-10">
         <Button asChild variant="outline" className="p-2">
-          <Link href="/home">
+          <Link href={`/${params.userId}/home`}>
             <ArrowLeft className="size-6" />
           </Link>
         </Button>
