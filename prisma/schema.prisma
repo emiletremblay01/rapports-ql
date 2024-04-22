@@ -17,7 +17,7 @@ model Post {
   isPinned Boolean @default(false)
   createdAt DateTime @default(now())
   tags String[] @default([])
-  user   User   @relation(fields: [userId], references: [id])
+
 }
 
 model User {
@@ -25,5 +25,5 @@ model User {
   name  String
   avatar_src String
   password String
-  posts  Post[]
+
 }
