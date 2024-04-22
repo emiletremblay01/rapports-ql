@@ -26,7 +26,7 @@ export default function Navbar({ className }: { className?: string }) {
     { name: "Settings", href: `/${params.userId}/settings`, icon: Settings },
   ];
   return (
-    <div className="w-18 flex flex-col items-stretch p-2 md:w-56 md:p-4">
+    <div className="w-18 flex flex-col items-stretch md:w-56">
       <NavigationMenu className="block max-w-full flex-1">
         <NavigationMenuList className="flex-col items-center gap-2 space-x-0 md:items-stretch">
           {routes.map((route, index) => (

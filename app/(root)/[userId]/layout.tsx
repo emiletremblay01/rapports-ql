@@ -20,7 +20,7 @@ export default async function RootLayout({
 
   return (
     <div className="flex xl:container">
-      <SidebarLeft className=" lg:w-full lg:max-w-lg" />
+      <SidebarLeft className=" " />
       {children}
       <SidebarRight className="hidden p-4 md:flex lg:flex-auto lg:basis-2/3" />
     </div>
