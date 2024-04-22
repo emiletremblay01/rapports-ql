@@ -13,7 +13,7 @@ export default async function SidebarLeft({
       id="sidebar-left"
       className={cn(
         className,
-        "flex h-screen max-w-lg flex-col items-center justify-between border-r p-4 md:items-end  ",
+        "flex h-screen max-w-lg flex-col items-center justify-between border-r px-2 py-4 md:items-end md:px-4  ",
       )}
     >
       <Navbar />

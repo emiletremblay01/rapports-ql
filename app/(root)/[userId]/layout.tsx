@@ -21,7 +21,10 @@ export default async function RootLayout({
   return (
     <div className="flex xl:container">
       <SidebarLeft className=" " />
-      {children}
+      <main className="flex min-h-screen w-full max-w-2xl flex-col items-center">
+        {children}
+      </main>
+
       <SidebarRight className="hidden p-4 md:flex lg:flex-auto lg:basis-2/3" />
     </div>
   );

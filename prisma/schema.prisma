@@ -13,6 +13,8 @@ model Post {
   id     String @id @default(auto()) @map("_id") @db.ObjectId
   title  String
   userId String @db.ObjectId
+  createdAt DateTime @default(now())
+  likedBy String[] @db.ObjectId
 }
 
 model User {
