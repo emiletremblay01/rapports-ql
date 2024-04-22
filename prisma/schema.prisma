@@ -9,15 +9,18 @@ generator client {
 
 //! Whenever you make changes to your Prisma models in the future, you manually need to invoke "npx prisma generate" in order to accommodate the changes in your Prisma Client API.
 
+type UserInfo {
+  userId String @db.ObjectId
+  name String
+}
 model Post {
   id     String @id @default(auto()) @map("_id") @db.ObjectId
   content  String
-  userId String @db.ObjectId
   likedBy String[] @db.ObjectId @default([])
   isPinned Boolean @default(false)
   createdAt DateTime @default(now())
   tags String[] @default([])
-
+  user UserInfo
 }
 
 model User {
