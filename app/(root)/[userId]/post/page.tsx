@@ -28,8 +28,8 @@ const formSchema = z.object({
     .min(2, {
       message: "Post must be at least 2 characters.",
     })
-    .max(160, {
-      message: "Post must not be longer than 160 characters.",
+    .max(500, {
+      message: "Post must not be longer than 500 characters.",
     }),
 });
 
