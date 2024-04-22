@@ -35,10 +35,10 @@ export function Post({ className, post }: PostProps) {
               <h1 className="text font-semibold">{user.name}</h1>
               <Tooltip>
                 <TooltipTrigger className="text-sm text-muted-foreground">
-                  · {formattedDate}
+                  · <span className="hover:underline">{formattedDate}</span>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>{hoverDate}</p>
+                  <p className="text-xs">{hoverDate}</p>
                 </TooltipContent>
               </Tooltip>
             </div>
