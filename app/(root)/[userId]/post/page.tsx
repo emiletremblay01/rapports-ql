@@ -43,8 +43,12 @@ export default function PostPage() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       setLoading(true);
-
-      await axios.post(`/api/post`, values);
+      const { post } = values;
+      const data = {
+        content: post,
+        userId: params.userId,
+      };
+      await axios.post(`/api/post`, data);
     } catch (error) {
       console.error(error);
     } finally {

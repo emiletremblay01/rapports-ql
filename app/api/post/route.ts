@@ -3,17 +3,32 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { post } = body;
-    if (!post) {
-      return new NextResponse("no post", { status: 400 });
+    const { content, userId } = body;
+
+    if (!content) {
+      return new NextResponse("Post content is required.", { status: 400 });
     }
-    const res = await prismadb.post.create({
+
+    if (!userId) {
+      return new NextResponse("User ID is required.", { status: 400 });
+    }
+
+    const user = await prismadb.user.findFirst({
+      where: { id: userId },
+    });
+
+    if (!user) {
+      return new NextResponse("User not found in database.", { status: 404 });
+    }
+
+    const post = await prismadb.post.create({
       data: {
-        post,
+        content,
+        userId,
       },
     });
 
-    return NextResponse.json(res);
+    return NextResponse.json(post);
   } catch (error) {
     console.error(error);
     return new NextResponse("error", { status: 500 });
