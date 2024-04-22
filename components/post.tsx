@@ -6,10 +6,16 @@ type PostProps = {
   className?: string;
   post: Post;
 };
-
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { dateFormatter } from "@/lib/utils";
 export function Post({ className, post }: PostProps) {
   const { content, createdAt, user } = post;
-
+  const { formattedDate, hoverDate } = dateFormatter(createdAt);
   return (
     <section
       className={cn(
@@ -17,19 +23,28 @@ export function Post({ className, post }: PostProps) {
         "w-full border-b p-3 transition-colors hover:bg-muted hover:bg-opacity-10",
       )}
     >
-      <div className="flex gap-2">
-        <Avatar>
-          <AvatarImage src="https://github.co" />
-          <AvatarFallback>SN</AvatarFallback>
-        </Avatar>
-        <section className="">
-          <div className="inline-flex items-baseline gap-1">
-            <h1 className="text font-semibold">{user.name}</h1>
-            <p className="text-sm text-muted-foreground">{String(createdAt)}</p>
-          </div>
-          <p className="text-sm">{content}</p>
-        </section>
-      </div>
+      <TooltipProvider>
+        <div className="flex gap-2">
+          <Avatar>
+            <AvatarImage src="https://github.co" />
+            <AvatarFallback>SN</AvatarFallback>
+          </Avatar>
+          <section className="">
+            <div className="inline-flex items-baseline gap-1">
+              <h1 className="text font-semibold">{user.name}</h1>
+              <Tooltip>
+                <TooltipTrigger className="text-sm text-muted-foreground">
+                  {formattedDate}
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{hoverDate}</p>
+                </TooltipContent>
+              </Tooltip>
+            </div>
+            <p className="text-sm">{content}</p>
+          </section>
+        </div>
+      </TooltipProvider>
     </section>
   );
 }

@@ -25,16 +25,22 @@ export function getInitials(name: string): string {
 export function dateFormatter(date: Date) {
   const now = new Date();
   const diffMs = now.getTime() - date.getTime();
-  const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+  const diffMinutes = Math.floor(diffMs / (1000 * 60));
   const output = {
-    hoverDate: `${date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} ${date.toLocaleTimeString([], { hour12: true }).toUpperCase()} - ${date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}`,
+    hoverDate: `${date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} - ${date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}`,
     formattedDate: date.toLocaleDateString("en-US", {
       month: "short",
       day: "numeric",
     }),
   };
-  if (diffHours < 24) {
-    output.formattedDate = `${diffHours}h`;
+
+  if (diffMinutes < 5) {
+    output.formattedDate = "now";
+  } else if (diffMinutes < 60) {
+    output.formattedDate = `${diffMinutes}m`;
+  } else if (diffMinutes < 24 * 60) {
+    output.formattedDate = `${Math.floor(diffMinutes / 60)}h`;
   }
+
   return output;
 }
