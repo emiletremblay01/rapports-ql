@@ -28,5 +28,4 @@ model User {
   name  String
   avatar_src String
   password String
-
 }

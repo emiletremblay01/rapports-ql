@@ -53,7 +53,7 @@ export default function PostPage() {
       const res = await axios.post(`/api/post`, data);
       if (res.status === 200) {
         toast("Post created successfully.");
-        revalidatePath("/[useId]/home", "page");
+        revalidatePath("/[userId]/home", "page");
         return;
       }
       toast("the response status is " + res.status);

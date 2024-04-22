@@ -21,10 +21,14 @@ export async function POST(req: NextRequest) {
       return new NextResponse("User not found in database.", { status: 404 });
     }
 
+    const { id, name } = user;
     const post = await prismadb.post.create({
       data: {
         content,
-        userId,
+        user: {
+          userId: id,
+          name: name,
+        },
       },
     });
 
