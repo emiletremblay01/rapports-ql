@@ -8,7 +8,7 @@ type PostProps = {
 };
 
 export function Post({ className, post }: PostProps) {
-  const { content, createdAt, userId } = post;
+  const { content, createdAt, user } = post;
 
   return (
     <section
@@ -24,7 +24,7 @@ export function Post({ className, post }: PostProps) {
         </Avatar>
         <section className="">
           <div className="inline-flex items-baseline gap-1">
-            <h1 className="text font-semibold">{userId}</h1>
+            <h1 className="text font-semibold">{user.name}</h1>
             <p className="text-sm text-muted-foreground">{String(createdAt)}</p>
           </div>
           <p className="text-sm">{content}</p>
