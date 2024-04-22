@@ -20,6 +20,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
 import { useParams } from "next/navigation";
+import { toast } from "sonner";
 const formSchema = z.object({
   post: z
     .string()
@@ -48,8 +49,14 @@ export default function PostPage() {
         content: post,
         userId: params.userId,
       };
-      await axios.post(`/api/post`, data);
+      const res = await axios.post(`/api/post`, data);
+      if (res.status === 200) {
+        toast("Post created successfully.");
+        return;
+      }
+      toast("the response status is " + res.status);
     } catch (error) {
+      toast("An error occurred. Please try again.");
       console.error(error);
     } finally {
       setLoading(false);
