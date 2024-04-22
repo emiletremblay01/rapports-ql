@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
-import SidebarLeft from "@/components/sidebar-left";
+import SidebarLeft from "@/components/async/sidebar-left";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -21,7 +21,7 @@ export default function TopLevelLayout({
       <body
         className={cn(
           inter.className,
-          process.env.NODE_ENV === "development" && "debug-screens"
+          process.env.NODE_ENV === "development" && "debug-screens",
         )}
       >
         <ThemeProvider

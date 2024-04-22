@@ -53,7 +53,7 @@ export default function PostPage() {
     <main className="flex min-h-screen w-full min-w-max max-w-2xl flex-col items-center gap-2 px-4 py-2">
       <div className="w-full pb-10">
         <Button asChild variant="outline" className="p-2">
-          <Link href="/">
+          <Link href="/home">
             <ArrowLeft className="size-6" />
           </Link>
         </Button>
