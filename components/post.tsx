@@ -1,12 +1,15 @@
-import { cn, getInitials } from "@/lib/utils";
-import { Separator } from "@/components/ui/separator";
+"use client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import dedent from "dedent";
+import { cn } from "@/lib/utils";
+import type { Post } from "@prisma/client";
 type PostProps = {
   className?: string;
+  post: Post;
 };
 
-export function Post({ className }: PostProps) {
+export function Post({ className, post }: PostProps) {
+  const { content, createdAt, userId } = post;
+
   return (
     <section
       className={cn(
@@ -21,16 +24,10 @@ export function Post({ className }: PostProps) {
         </Avatar>
         <section className="">
           <div className="inline-flex items-baseline gap-1">
-            <h1 className="text font-semibold">Samuel Claude</h1>
-            <p className="text-sm text-muted-foreground">· 22h</p>
+            <h1 className="text font-semibold">{userId}</h1>
+            <p className="text-sm text-muted-foreground">{String(createdAt)}</p>
           </div>
-          <p className="text-sm">
-            Coming shortly, 𝕏 will publish everything demanded by @Alexandre and
-            how those requests violate Brazilian law.
-            <br /> This judge has brazenly and repeatedly betrayed the
-            constitution and people of Brazil. He should resign or be impeached.
-            Shame @Alexandre , shame.
-          </p>
+          <p className="text-sm">{content}</p>
         </section>
       </div>
     </section>
