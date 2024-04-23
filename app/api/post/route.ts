@@ -1,5 +1,6 @@
 import prismadb from "@/lib/prismadb";
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -31,7 +32,7 @@ export async function POST(req: NextRequest) {
         },
       },
     });
-
+    revalidatePath(`/[userId]/home`, "page");
     return NextResponse.json(post);
   } catch (error) {
     console.error(error);

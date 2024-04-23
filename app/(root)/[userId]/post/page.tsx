@@ -19,7 +19,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { revalidatePath } from "next/cache";
 const formSchema = z.object({
@@ -35,6 +35,7 @@ const formSchema = z.object({
 
 export default function PostPage() {
   const params = useParams();
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -53,7 +54,9 @@ export default function PostPage() {
       const res = await axios.post(`/api/post`, data);
       if (res.status === 200) {
         toast("Post created successfully.");
-        revalidatePath("/(root)/[userId]/home", "page");
+        router.push(`/${params.userId}/home`);
+        router.refresh();
+
         return;
       }
       toast("the response status is " + res.status);
