@@ -11,6 +11,12 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { dateFormatter, getInitials } from "@/lib/utils";
 export function Post({ className, post }: PostProps) {
   const { content, createdAt, user } = post;

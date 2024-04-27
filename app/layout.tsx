@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Reports App",
   description: "App with a feed of reports from the team",
 };
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 export default function TopLevelLayout({
   children,
@@ -29,8 +30,10 @@ export default function TopLevelLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
-          <Toaster />
+          <TooltipProvider>
+            {children}
+            <Toaster />
+          </TooltipProvider>
         </ThemeProvider>
       </body>
     </html>
