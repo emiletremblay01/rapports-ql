@@ -21,7 +21,7 @@ export default async function RootLayout({
   return (
     <div className="flex h-[calc(100dvh)] xl:container">
       <SidebarLeft className=" " />
-      <main className="flex h-full w-full max-w-2xl flex-col items-center overflow-scroll">
+      <main className="flex h-full w-full max-w-2xl flex-col items-center">
         {children}
       </main>
 

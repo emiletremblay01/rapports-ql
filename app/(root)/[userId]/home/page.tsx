@@ -1,4 +1,5 @@
 import { Post } from "@/components/post";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import prismadb from "@/lib/prismadb";
 export default async function Home() {
   const posts = await prismadb.post.findMany({
@@ -8,9 +9,11 @@ export default async function Home() {
 
   return (
     <main className="flex h-screen w-full max-w-2xl flex-col items-center overflow-scroll">
-      {posts.map((post) => (
-        <Post key={post.id} post={post} />
-      ))}
+      <TooltipProvider>
+        {posts.map((post) => (
+          <Post key={post.id} post={post} />
+        ))}
+      </TooltipProvider>
     </main>
   );
 }
