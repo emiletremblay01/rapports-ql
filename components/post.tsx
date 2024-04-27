@@ -11,12 +11,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import PostActions from "@/components/post-actions";
 import { dateFormatter, getInitials } from "@/lib/utils";
 export function Post({ className, post }: PostProps) {
   const { content, createdAt, user } = post;
@@ -29,13 +24,14 @@ export function Post({ className, post }: PostProps) {
         "w-full border-b p-3 transition-colors hover:bg-muted hover:bg-opacity-10",
       )}
     >
-      <div className="flex gap-2">
+      <div className="relative flex gap-2">
+        <PostActions className="absolute right-0" />
         <Avatar>
           <AvatarImage src="https://github.co" />
           <AvatarFallback>{initials}</AvatarFallback>
         </Avatar>
         <section className="">
-          <div className="inline-flex items-baseline gap-1">
+          <div className="relative inline-flex items-baseline gap-1">
             <h1 className="text font-semibold">{user.name}</h1>
             <Tooltip>
               <TooltipTrigger className="text-sm text-muted-foreground">
