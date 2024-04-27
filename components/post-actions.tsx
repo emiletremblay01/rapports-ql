@@ -22,6 +22,7 @@ export default function PostActions({ className }: { className?: string }) {
       <DropdownMenuContent>
         <DropdownMenuItem>Edit</DropdownMenuItem>
         <DropdownMenuItem>Delete</DropdownMenuItem>
+        <DropdownMenuItem>Pin</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
