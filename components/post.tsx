@@ -21,7 +21,7 @@ export function Post({ className, post }: PostProps) {
     <section
       className={cn(
         className,
-        "w-full border-b p-3 transition-colors hover:bg-muted hover:bg-opacity-10",
+        "hover:bg-muted-background w-full border-b p-3 transition-colors hover:bg-opacity-10",
       )}
     >
       <div className="relative flex gap-2">
