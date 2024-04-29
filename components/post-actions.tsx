@@ -12,6 +12,7 @@ import axios, { AxiosError } from "axios";
 import type { Post } from "@prisma/client";
 import { useParams, useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { useState } from "react";
 type PostActionsProps = {
   className?: string;
   post: Post;
@@ -20,7 +21,9 @@ export default function PostActions({ className, post }: PostActionsProps) {
   const params = useParams();
   const router = useRouter();
   const { userId } = params;
-  const { id } = post;
+  const { id, isPinned } = post;
+  const [isPinnedState, setIsPinnedState] = useState(isPinned);
+
   const handleDelete = async () => {
     try {
       const res = await axios.delete("/api/post", {
@@ -41,6 +44,29 @@ export default function PostActions({ className, post }: PostActionsProps) {
       toast("Error deleting post. Check the console for more details.");
     }
   };
+
+  const handlePin = async () => {
+    try {
+      const res = await axios.patch("/api/post", {
+        data: {
+          postId: id,
+          userId: userId,
+          isPinned: !isPinned,
+        },
+      });
+      toast("Post pinned successfully.");
+      router.refresh();
+    } catch (error: any | AxiosError) {
+      console.error(error);
+      if (axios.isAxiosError(error)) {
+        const { response } = error as AxiosError;
+        toast("Error pinning post:\n" + response?.data);
+        return;
+      }
+      toast("Error pinning post. Check the console for more details.");
+    }
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
@@ -60,7 +86,7 @@ export default function PostActions({ className, post }: PostActionsProps) {
           <Trash2 className="mr-2 size-4" />
           Delete
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={handlePin}>
           <Pin className="mr-2 size-4" />
           Pin
         </DropdownMenuItem>

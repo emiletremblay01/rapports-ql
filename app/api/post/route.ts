@@ -75,3 +75,44 @@ export async function DELETE(req: NextRequest) {
     return new NextResponse("error", { status: 500 });
   }
 }
+
+export async function PATCH(req: NextRequest) {
+  try {
+    const body = await req.json();
+    const { postId, content, userId, isPinned } = body;
+
+    if (!postId) {
+      return new NextResponse("Post ID is required.", { status: 400 });
+    }
+
+    if (!userId) {
+      return new NextResponse("User ID is required.", { status: 400 });
+    }
+
+    // if (!content) {
+    //   return new NextResponse("Post content is required.", { status: 400 });
+    // }
+
+    const post = await prismadb.post.findFirst({
+      where: { id: postId },
+    });
+
+    if (!post) {
+      return new NextResponse("Post not found in database.", { status: 404 });
+    }
+
+    if (post.user.userId !== userId) {
+      return new NextResponse("Unauthorized to edit", { status: 401 });
+    }
+
+    await prismadb.post.update({
+      where: { id: postId },
+      data: { content, isPinned },
+    });
+    revalidatePath(`/[userId]/home`, "page");
+    return new NextResponse("Post updated successfully.");
+  } catch (error) {
+    console.error(error);
+    return new NextResponse("error", { status: 500 });
+  }
+}
