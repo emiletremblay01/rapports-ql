@@ -79,19 +79,11 @@ export async function DELETE(req: NextRequest) {
 export async function PATCH(req: NextRequest) {
   try {
     const body = await req.json();
-    const { postId, content, userId, isPinned } = body;
+    const { postId, content, isPinned } = body.data;
 
     if (!postId) {
       return new NextResponse("Post ID is required.", { status: 400 });
     }
-
-    if (!userId) {
-      return new NextResponse("User ID is required.", { status: 400 });
-    }
-
-    // if (!content) {
-    //   return new NextResponse("Post content is required.", { status: 400 });
-    // }
 
     const post = await prismadb.post.findFirst({
       where: { id: postId },
@@ -101,16 +93,12 @@ export async function PATCH(req: NextRequest) {
       return new NextResponse("Post not found in database.", { status: 404 });
     }
 
-    if (post.user.userId !== userId) {
-      return new NextResponse("Unauthorized to edit", { status: 401 });
-    }
-
     await prismadb.post.update({
       where: { id: postId },
       data: { content, isPinned },
     });
     revalidatePath(`/[userId]/home`, "page");
-    return new NextResponse("Post updated successfully.");
+    return new NextResponse("Post pinned successfully.");
   } catch (error) {
     console.error(error);
     return new NextResponse("error", { status: 500 });

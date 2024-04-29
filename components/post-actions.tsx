@@ -32,12 +32,15 @@ export default function PostActions({ className, post }: PostActionsProps) {
           userId: userId,
         },
       });
+      if (res.status !== 200) {
+        throw new Error("Error deleting post.");
+      }
       toast("Post deleted successfully.");
       router.refresh();
-    } catch (error: any | AxiosError) {
+    } catch (error) {
       console.error(error);
       if (axios.isAxiosError(error)) {
-        const { response } = error as AxiosError;
+        const { response } = error;
         toast("Error deleting post:\n" + response?.data);
         return;
       }
@@ -50,13 +53,16 @@ export default function PostActions({ className, post }: PostActionsProps) {
       const res = await axios.patch("/api/post", {
         data: {
           postId: id,
-          userId: userId,
+
           isPinned: !isPinned,
         },
       });
+      if (res.status !== 200) {
+        throw new Error("Error pinning post.");
+      }
       toast("Post pinned successfully.");
       router.refresh();
-    } catch (error: any | AxiosError) {
+    } catch (error) {
       console.error(error);
       if (axios.isAxiosError(error)) {
         const { response } = error;
