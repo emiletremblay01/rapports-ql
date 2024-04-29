@@ -21,11 +21,11 @@ export function Post({ className, post }: PostProps) {
     <section
       className={cn(
         className,
-        "hover:bg-muted-background w-full border-b p-3 transition-colors hover:bg-opacity-10",
+        "w-full border-b p-3 transition-colors hover:bg-muted-background hover:bg-opacity-10",
       )}
     >
       <div className="relative flex gap-2">
-        <PostActions className="absolute right-0" />
+        <PostActions className="absolute right-0" post={post} />
         <Avatar>
           <AvatarImage src="https://github.co" />
           <AvatarFallback>{initials}</AvatarFallback>
