@@ -59,8 +59,8 @@ export default function PostActions({ className, post }: PostActionsProps) {
     } catch (error: any | AxiosError) {
       console.error(error);
       if (axios.isAxiosError(error)) {
-        const { response } = error as AxiosError;
-        toast("Error pinning post:\n" + response?.data);
+        const { response } = error;
+        toast("Error pinning post: " + response?.data);
         return;
       }
       toast("Error pinning post. Check the console for more details.");
